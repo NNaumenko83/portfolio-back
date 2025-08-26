@@ -10,5 +10,83 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRES_URI")
 }
+
+model Owner {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  avatarUrl String? @map("avatar_url")
+  createdAt DateTime  @default(now()) @map("created_at")
+  projects  Project[] @relation("owner-projects")
+  techStacks TechStack[] @relation("owner-tech-stacks")
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  owner       Owner    @relation("owner-projects", fields: [ownerId], references: [id])
+  ownerId     String   @map("owner_id")
+  title       String
+  description String
+  imageUrl    String? @map("image_url")
+  link        String?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  images      ProjectImage[]
+  techStacks  TechStack[] @relation("project-tech-stacks")
+}
+model ProjectImage {
+  id          String   @id @default(uuid())
+  project     Project @relation(fields: [projectId], references: [id])
+  projectId   String
+  url         String
+  description String?
+}
+model TechStack {
+  id        String   @id @default(uuid())
+  name      Tech
+  projects  Project[] @relation("project-tech-stacks")
+  owner     Owner[]   @relation("owner-tech-stacks")
+}
+
+enum Tech {
+  // --- Frontend ---
+  HTML
+  CSS
+  JavaScript
+  TypeScript
+  React
+  NextJS
+  Vue
+  Nuxt
+  Angular
+  Svelte
+  TailwindCSS
+  Bootstrap
+  Redux
+  Zustand
+  GraphQL
+  Webpack
+  Vite
+
+  // --- Backend ---
+  NodeJS
+  Express
+  NestJS
+  Fastify
+  REST
+  PostgreSQL
+  MySQL
+  MongoDB
+  SQLite
+  Prisma
+  TypeORM
+  Docker
+  Redis
+  Kafka
+  RabbitMQ
+  WebSockets
+  JWT
+}
+
+
