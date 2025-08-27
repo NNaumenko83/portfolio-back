@@ -9,7 +9,6 @@ export class OwnerService {
     async getOwner(): Promise<GetOwnerDto> {
         const owner = await this.prisma.owner.findFirst({
             include: {
-                projects: true,
                 techStacks: true,
             },
         });
