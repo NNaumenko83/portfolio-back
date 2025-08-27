@@ -28,7 +28,7 @@ CREATE TABLE "public"."Project" (
 -- CreateTable
 CREATE TABLE "public"."ProjectImage" (
     "id" TEXT NOT NULL,
-    "projectId" TEXT NOT NULL,
+    "project_id" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "description" TEXT,
 
@@ -69,7 +69,7 @@ CREATE INDEX "_project-tech-stacks_B_index" ON "public"."_project-tech-stacks"("
 ALTER TABLE "public"."Project" ADD CONSTRAINT "Project_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "public"."Owner"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."ProjectImage" ADD CONSTRAINT "ProjectImage_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "public"."Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."ProjectImage" ADD CONSTRAINT "ProjectImage_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "public"."Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."_owner-tech-stacks" ADD CONSTRAINT "_owner-tech-stacks_A_fkey" FOREIGN KEY ("A") REFERENCES "public"."Owner"("id") ON DELETE CASCADE ON UPDATE CASCADE;
