@@ -1,9 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { TechStackDto } from "./tech-stack-response.dto";
 
-
-
-
 export class ProjectResponseDto {
     @ApiProperty({
         description: 'The unique identifier of the project',
