@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Tech } from "@prisma/client";
 import { IsString, IsUUID } from "class-validator";
 
